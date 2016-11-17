@@ -9,14 +9,14 @@ const initialState = {
 
 const users = (state = initialState, action) => {
   switch (action.type) {
-    case "FETCH_USER_START": {
+    case "FETCH_USER_PENDING": {
       return {
       	...state,
       	fetching: true
       }
       break;
     }
-    case "FETCH_USER_COMPLETE": {
+    case "FETCH_USER_FULFILLED": {
       return {
       	...state,
       	fetching: false,
@@ -25,7 +25,7 @@ const users = (state = initialState, action) => {
       }
       break;
     }
-    case "FETCH_USER_ERROR": {
+    case "FETCH_USER_REJECTED": {
       return {
       	...state,
       	fetching: false,

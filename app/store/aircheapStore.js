@@ -23,7 +23,7 @@ const aircheapStore = createStore(
 );
 
 aircheapStore.dispatch({
-	type: "FOO",
+	type: "FETCH_USER",
 	payload: axios.get('http://rest.learncode.academy/api/wstern/users')
 });
 
