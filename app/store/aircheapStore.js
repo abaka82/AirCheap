@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import reducers from '../reducers';
 import axios from 'axios';
 import logger from 'redux-logger';
+import promise from 'redux-promise-middleware';
 
 /*const logger = (store) => (next) => (action) => {
   if(typeof action !== "function"){
@@ -18,17 +19,12 @@ const enhancers = compose(
 const aircheapStore = createStore(
   reducers,
   enhancers,
-  applyMiddleware(logger(), thunk)
+  applyMiddleware(promise(), logger(), thunk)
 );
 
-aircheapStore.dispatch({type: "FETCH_USER_START"});
-
-axios.get('http://rest.learncode.academy/api/wstern/users')
-.then((response) => {
-	aircheapStore.dispatch({type: "FETCH_USER_COMPLETE", payload: response.data})
-})
-.catch((err) => {
-	aircheapStore.dispatch({type: "FETCH_USER_ERROR", payload: err})
-})
+aircheapStore.dispatch({
+	type: "FOO",
+	payload: axios.get('http://rest.learncode.academy/api/wstern/users')
+});
 
 export default aircheapStore;
